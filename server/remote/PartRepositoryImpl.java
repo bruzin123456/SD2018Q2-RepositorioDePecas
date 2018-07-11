@@ -65,6 +65,9 @@ public class PartRepositoryImpl implements PartRepository {
             sb.append(p.getCodigo());
             sb.append("\t");
             sb.append(p.getNome());
+            sb.append("\t");
+            sb.append(p.getDescricao());
+            sb.append("\n");
         }
         return sb.toString();
     }

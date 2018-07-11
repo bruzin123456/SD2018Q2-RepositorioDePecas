@@ -1,16 +1,18 @@
 package client.commands;
 
 import client.Client;
+import client.RepositoryConnection;
 import command.ICommand;
 
-public abstract class AddPartCommand extends BaseClientCommand {
+import java.rmi.RemoteException;
+
+public class AddPartCommand extends BaseClientCommand {
 
     @Override
     public String getCommandName() {
         return "addp";
     }
 
-    @Action
     public String getDescription() {
         return "addp <nome> <descricao>";
     }
@@ -25,7 +27,7 @@ public abstract class AddPartCommand extends BaseClientCommand {
             }
             try {
                 StringBuilder descricao = new StringBuilder();
-                for (int indice = 2; i < args.length; ++indice) {
+                for (int indice = 2; indice < args.length; ++indice) {
                     descricao.append(args[indice]);
                     descricao.append(" ");
                 }

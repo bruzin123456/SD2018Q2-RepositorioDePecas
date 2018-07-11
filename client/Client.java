@@ -1,7 +1,11 @@
 package client;
 
 import command.CommandsManager;
+import server.remote.Part;
 import server.remote.PartRepository;
+
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 public class Client {
@@ -30,6 +34,10 @@ public class Client {
 
     public void unbind(){
         repositoryConnection = null;
+    }
+
+    public void selectPart(int codigo) throws RemoteException, NotBoundException {
+        repositoryConnection.part = (Part) repositoryConnection.registry.lookup(String.valueOf(codigo));
     }
 
     public  CommandsManager getCommandsManager() {
