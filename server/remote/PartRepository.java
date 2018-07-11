@@ -11,7 +11,7 @@ public interface PartRepository extends Remote {
 
     PartImpl findPart(int code) throws RemoteException;
 
-    void addPart(PartImpl part) throws RemoteException;
+    int addPart(String nome, String descricao) throws RemoteException;
 
     String partListing() throws RemoteException;
 

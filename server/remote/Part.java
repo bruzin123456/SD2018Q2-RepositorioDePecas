@@ -1,6 +1,6 @@
 package server.remote;
 
-import javafx.util.Pair;
+
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -14,5 +14,7 @@ public interface Part extends Remote
 
     String getDescricao() throws RemoteException;
 
-    List<Pair<PartImpl, Integer>> getSubParts() throws RemoteException;
+    List<SubPart> getSubParts() throws RemoteException;
+
+    void addSubPart(int codigo, int count) throws RemoteException;
 }

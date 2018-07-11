@@ -3,6 +3,8 @@ package server.remote;
 import server.Server;
 
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,6 +14,8 @@ public class PartRepositoryImpl implements PartRepository {
         repositoryName = name;
         this.server = server;
     }
+
+    private int codGenerator = 666;
 
     private String repositoryName;
 
@@ -37,8 +41,21 @@ public class PartRepositoryImpl implements PartRepository {
     }
 
     @Override
-    public void addPart(PartImpl part) {
-        partsList.add(part);
+    public int addPart(String nome, String descricao) {
+        try {
+            PartImpl nPart = new PartImpl();
+            nPart.setNome(nome);
+            nPart.setDescricao(descricao);
+            nPart.setCodigo(codGenerator);
+            server.bindPart(nPart);
+            partsList.add(nPart);
+            codGenerator++;
+            return nPart.getCodigo();
+        }
+        catch (Exception e){
+            System.out.println("Bugo chama o bombeiro");
+        }
+        return 0;
     }
 
     @Override

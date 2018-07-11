@@ -1,8 +1,12 @@
 package server;
 
+import server.remote.Part;
+import server.remote.PartImpl;
 import server.remote.PartRepository;
 import server.remote.PartRepositoryImpl;
 
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -31,6 +35,12 @@ public class Server {
         catch (Exception e){
             e.printStackTrace();
         }
+
+    }
+
+    public  void bindPart(PartImpl part) throws RemoteException, AlreadyBoundException {
+        Part partStub = (Part) UnicastRemoteObject.exportObject(part, port);
+        registry.bind(String.valueOf(part.getCodigo()), partStub);
 
     }
 }

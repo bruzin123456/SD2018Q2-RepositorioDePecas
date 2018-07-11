@@ -1,16 +1,16 @@
 package server.remote;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import javafx.util.Pair;
 
-public class PartImpl implements Part, Serializable
+public class PartImpl implements Part
 {
     private int codigo;
     private String nome;
     private String descricao;
-    private List<Pair<PartImpl, Integer>> subParts;
+    private List<SubPart> subParts = new ArrayList<>();
 
     public int getCodigo() {
         return codigo;
@@ -36,11 +36,15 @@ public class PartImpl implements Part, Serializable
         this.descricao = descricao;
     }
 
-    public List<Pair<PartImpl, Integer>> getSubParts() {
+    public List<SubPart> getSubParts() {
         return subParts;
     }
 
-    public void setSubParts(List<Pair<PartImpl, Integer>> subParts) {
-        this.subParts = subParts;
+    public void addSubPart(int codigo, int count){
+        SubPart sub = new SubPart();
+        sub.codigoPart = codigo;
+        sub.count = count;
+        subParts.add(sub);
     }
+
 }
