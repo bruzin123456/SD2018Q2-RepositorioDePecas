@@ -2,17 +2,12 @@ package client;
 
 import command.CommandsManager;
 import server.remote.PartRepository;
-
 import java.rmi.registry.LocateRegistry;
 
 public class Client {
 
     private CommandsManager commandsManager = new CommandsManager();
-
     private RepositoryConnection repositoryConnection; //if is connected is != than null
-
-
-
 
     public boolean bind(String host, int port){
         try {
