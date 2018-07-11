@@ -18,7 +18,6 @@ public class QuitCommand extends BaseClientCommand {
     @Override
     protected boolean processCommand(Client client, String[] args) {
         printMessage("Encerrando...");
-        System.exit(0);
-        return false;
+        return true;
     }
 }

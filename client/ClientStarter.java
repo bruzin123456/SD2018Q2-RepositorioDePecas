@@ -3,7 +3,6 @@ package client;
 import client.commands.*;
 import command.CommandsManager;
 import command.ICommand;
-
 import java.util.Scanner;
 
 public class ClientStarter {
@@ -27,6 +26,7 @@ public class ClientStarter {
             end = cmd.executeCommand(client, cmdArgs);
         }
         // Do what need to be done before exiting
+        s.close();
     }
 
     private static void initializeCommands(){
@@ -39,6 +39,7 @@ public class ClientStarter {
             commandsManager.addCommand(new CurrentCommand());
             commandsManager.addCommand(new ListPartsCommand());
             commandsManager.addCommand(new QuitCommand());
+            commandsManager.addCommand(new AddPartCommand());
         }
         catch (Exception e){
             System.out.println("Um comando com esse nome já existe!!");
