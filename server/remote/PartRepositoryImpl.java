@@ -19,7 +19,7 @@ public class PartRepositoryImpl implements PartRepository {
 
     private String repositoryName;
 
-    private List<PartImpl>partsList = new LinkedList<>();
+    private List<Part>partsList = new LinkedList<>();
 
     private Server server;
 
@@ -34,10 +34,16 @@ public class PartRepositoryImpl implements PartRepository {
     }
 
     @Override
-    public PartImpl findPart(int code) {
-        return partsList.stream().filter(part -> code == part.getCodigo())
-                .findAny()
-                .orElse(null);
+    public Part findPart(int code) {
+        try {
+            for(Part part : partsList){
+                if(part.getCodigo() == code)
+                    return part;
+            }
+        }
+        catch (Exception e){
+        }
+        return  null;
     }
 
     @Override
@@ -47,8 +53,7 @@ public class PartRepositoryImpl implements PartRepository {
             nPart.setNome(nome);
             nPart.setDescricao(descricao);
             nPart.setCodigo(codGenerator);
-            server.bindPart(nPart);
-            partsList.add(nPart);
+            partsList.add(server.bindPart(nPart));
             codGenerator++;
             return nPart.getCodigo();
         }
@@ -61,13 +66,18 @@ public class PartRepositoryImpl implements PartRepository {
     @Override
     public String partListing() {
         StringBuilder sb = new StringBuilder();
-        for(PartImpl p : partsList){
-            sb.append(p.getCodigo());
-            sb.append("\t");
-            sb.append(p.getNome());
-            sb.append("\t");
-            sb.append(p.getDescricao());
-            sb.append("\n");
+        for(Part p : partsList){
+            try {
+                sb.append(p.getCodigo());
+                sb.append("\t");
+                sb.append(p.getNome());
+                sb.append("\t");
+                sb.append(p.getDescricao());
+                sb.append("\n");
+            }
+            catch (Exception e){
+                sb.append("Erro de comunicação \n");
+            }
         }
         return sb.toString();
     }
