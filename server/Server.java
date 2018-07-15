@@ -38,9 +38,10 @@ public class Server {
 
     }
 
-    public  void bindPart(PartImpl part) throws RemoteException, AlreadyBoundException {
+    public  Part bindPart(PartImpl part) throws RemoteException, AlreadyBoundException {
         Part partStub = (Part) UnicastRemoteObject.exportObject(part, port);
         registry.bind(String.valueOf(part.getCodigo()), partStub);
+        return partStub;
 
     }
 }
