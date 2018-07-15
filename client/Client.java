@@ -37,7 +37,9 @@ public class Client {
     }
 
     public void selectPart(int codigo) throws RemoteException, NotBoundException {
-        repositoryConnection.part = (Part) repositoryConnection.registry.lookup(String.valueOf(codigo));
+        if(repositoryConnection == null)
+            return;
+        repositoryConnection.part = repositoryConnection.partRepository.findPart(codigo);
     }
 
     public  CommandsManager getCommandsManager() {

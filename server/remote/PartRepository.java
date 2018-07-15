@@ -9,7 +9,7 @@ public interface PartRepository extends Remote {
 
     int getPartsCount() throws RemoteException;
 
-    PartImpl findPart(int code) throws RemoteException;
+    Part findPart(int code) throws RemoteException;
 
     int addPart(String nome, String descricao) throws RemoteException;
 
