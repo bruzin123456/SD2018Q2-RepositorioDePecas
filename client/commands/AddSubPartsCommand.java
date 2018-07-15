@@ -1,23 +1,23 @@
 package client.commands;
 
 import client.Client;
-import command.ICommand;
+import server.remote.SubPart;
 
-public class AddSubPartCommand extends BaseClientCommand {
+public class AddSubPartsCommand extends BaseClientCommand {
 
     @Override
     public String getCommandName() {
-        return "addsubp";
+        return "addsp";
     }
 
     @Override
     public String getDescription() {
-        return "Adiciona sub parts <Codigo> <Quant>";
+        return "Adiciona as sub partes da lista de criação para a peça atual";
     }
 
     @Override
     protected boolean processCommand(Client client, String[] args) {
-        if(args.length != 3) {
+        if(args.length != 1) {
             printInvalidArgs();
             return  false;
         }
@@ -26,7 +26,13 @@ public class AddSubPartCommand extends BaseClientCommand {
             return false;
         }
         try {
-            client.getRepositoryConnection().part.addSubPart(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+            if(client.getSubPartsStagingList().isEmpty()){
+                printMessage("Lista de criação de sub partes vazia...");
+                return false;
+            }
+            client.getRepositoryConnection().part.addSubParts(client.getSubPartsStagingList());
+            client.getSubPartsStagingList().clear();
+            printMessage("Sub partes adicionadas com sucesso...");
         }
         catch (Exception e){
             printMessage("Aconteceu um erro...");

@@ -1,6 +1,5 @@
 package server.remote;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +9,7 @@ public class PartImpl implements Part
     private int codigo;
     private String nome;
     private String descricao;
+    private PartRepositoryImpl repository;
     private List<SubPart> subParts = new ArrayList<>();
 
     public int getCodigo() {
@@ -40,11 +40,11 @@ public class PartImpl implements Part
         return subParts;
     }
 
-    public void addSubPart(int codigo, int count){
-        SubPart sub = new SubPart();
-        sub.codigoPart = codigo;
-        sub.count = count;
-        subParts.add(sub);
+    public void addSubParts(List<SubPart> sParts){
+        subParts.addAll(sParts);
     }
 
+    public void setRepository(PartRepositoryImpl repository){ this.repository = repository; }
+
+    public String getNomeRepositorio() { return repository.getRepositoryName(); }
 }

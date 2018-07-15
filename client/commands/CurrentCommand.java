@@ -2,7 +2,6 @@ package client.commands;
 
 import client.Client;
 import client.RepositoryConnection;
-import command.ICommand;
 import server.remote.SubPart;
 
 import java.rmi.RemoteException;
@@ -41,7 +40,12 @@ public class CurrentCommand extends BaseClientCommand {
                     printMessage("Descrição: " + repositoryConnection.part.getDescricao());
                     printMessage("---Sub Parts---");
                     for(SubPart sp : repositoryConnection.part.getSubParts()){
-                        printMessage("Código: " + sp.codigoPart + "\tQuantidade: " + sp.count);
+                        try {
+                            printMessage("Código: " + sp.part.getCodigo() + "\tQuantidade: " + sp.count + "\tRepositorio: " + sp.part.getNomeRepositorio());
+                        }
+                        catch (RemoteException e){
+                            printMessage("Erro de comunicação (o servidor da peça foi desligado ?)...");
+                        }
                     }
                     printMessage("---------------------------------------------");
 

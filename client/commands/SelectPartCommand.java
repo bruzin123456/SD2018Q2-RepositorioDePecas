@@ -13,13 +13,15 @@ public class SelectPartCommand extends BaseClientCommand {
     }
 
     public String getDescription() {
-        return "addp <nome> <descricao>";
+        return "seleciona a peça com o codigo <Codigo>";
     }
 
     @Override
     protected boolean processCommand(Client client, String[] args) {
-        if(args.length != 2)
+        if(args.length != 2) {
             printInvalidArgs();
+            return false;
+        }
         try{
             int codigo = Integer.parseInt(args[1]);
             client.selectPart(codigo);

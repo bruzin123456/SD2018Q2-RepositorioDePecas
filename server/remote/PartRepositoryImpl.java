@@ -7,11 +7,14 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class PartRepositoryImpl implements PartRepository {
 
     public PartRepositoryImpl(String name, Server server){
         repositoryName = name;
+        Random r = new Random();
+        codGenerator = random_int(0, 99999);
         this.server = server;
     }
 
@@ -53,6 +56,7 @@ public class PartRepositoryImpl implements PartRepository {
             nPart.setNome(nome);
             nPart.setDescricao(descricao);
             nPart.setCodigo(codGenerator);
+            nPart.setRepository(this);
             partsList.add(server.bindPart(nPart));
             codGenerator++;
             return nPart.getCodigo();
@@ -80,5 +84,10 @@ public class PartRepositoryImpl implements PartRepository {
             }
         }
         return sb.toString();
+    }
+
+    public int random_int(int Min, int Max)
+    {
+        return (int) (Math.random()*(Max-Min))+Min;
     }
 }

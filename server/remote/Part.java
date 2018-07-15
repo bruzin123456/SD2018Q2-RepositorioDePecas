@@ -12,9 +12,11 @@ public interface Part extends Remote
 
     String getNome() throws RemoteException;
 
+    String getNomeRepositorio() throws RemoteException;
+
     String getDescricao() throws RemoteException;
 
     List<SubPart> getSubParts() throws RemoteException;
 
-    void addSubPart(int codigo, int count) throws RemoteException;
+    void addSubParts(List<SubPart> sParts) throws RemoteException;
 }

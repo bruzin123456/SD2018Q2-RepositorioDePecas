@@ -41,7 +41,10 @@ public class ClientStarter {
             commandsManager.addCommand(new QuitCommand());
             commandsManager.addCommand(new AddPartCommand());
             commandsManager.addCommand(new SelectPartCommand());
-            commandsManager.addCommand(new AddSubPartCommand());
+            commandsManager.addCommand(new AddToSubPartStagingListCommand());
+            commandsManager.addCommand(new AddSubPartsCommand());
+            commandsManager.addCommand(new ShowStagingSubPartListCommand());
+            commandsManager.addCommand(new ClearSubPartStagingListCommand());
         }
         catch (Exception e){
             System.out.println("Um comando com esse nome já existe!!");
